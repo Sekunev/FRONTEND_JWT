@@ -3,15 +3,15 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Toaster, toast } from "react-hot-toast";
-import config from "../config";
+import config from "../../config";
 import Cookies from "js-cookie";
 import { checkAuth } from "@/authservice/auth/withauth";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser, removeUser } from "../features/authSlice";
+import { setUser, removeUser } from "../../features/authSlice";
 const Welcome = () => {
   const [isToken, setIsToken] = useState(true);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
   const router = useRouter();
@@ -27,7 +27,7 @@ const Welcome = () => {
       });
       Cookies.remove("accessToken");
       Cookies.remove("refreshToken");
-      // dispatch(removeUser());
+      dispatch(removeUser());
       setIsToken(false);
       toast.success("Logged out successfully", {
         position: "top-left",
@@ -58,7 +58,7 @@ const Welcome = () => {
 
       //! Kullanıcı Yoksa Login sayfasına yönlendir.
 
-      // dispatch(setUser(data.user));
+      dispatch(setUser(data.user));
       if (!data.user) {
         router.push("/login");
       }

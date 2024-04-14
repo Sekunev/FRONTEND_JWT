@@ -1,6 +1,6 @@
 "use client";
 import withAuth from "@/authservice/auth/withauth";
-import Welcome from "@/pagess/welcome";
+import Welcome from "@/app/components/welcome";
 import store from "./store";
 import { Provider } from "react-redux";
 const Home = () => {
